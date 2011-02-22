@@ -21,7 +21,7 @@
       @productversion Flex 4
 -->
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" 
-    xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabled="0.5" xmlns:mx="library://ns.adobe.com/flex/mx">
+    xmlns:fb="http://ns.adobe.com/flashbuilder/2009" alpha.disabled="0.5" xmlns:mx="library://ns.adobe.com/flex/mx" width="305" height="75">
     <fx:Metadata>[HostComponent("ActorToolTip")]</fx:Metadata>
 
     <fx:Script fb:purpose="styling">
@@ -83,7 +83,7 @@
 		<s:HGroup>
 			<mx:Image source="{this.hostComponent.actorImage}"/>
 
-			<s:VGroup width="220" height="64" paddingTop="5" paddingBottom="5" paddingRight="10" gap="4">
+			<s:VGroup width="220" height="75" paddingTop="5" paddingBottom="5" paddingRight="10" gap="4">
 				<s:Label text="{Strings.format('{actor.name}', this.hostComponent)}" fontFamily="TopBody" fontSize="18" width="100%"/>
                 <s:Label text="{Strings.format('Earns {actor.pay:$#,##0} per episode of {actor.showName} on {actor.network}', this.hostComponent)}" fontSize="14" color="0x666666" width="100%" lineHeight="15"/>
                 <s:Label text="{Strings.format('Season: {actor.season}, IMDB Rating: {actor.imdbRating}', this.hostComponent)}" fontSize="12" color="0x999999" width="100%"/>

@@ -3,7 +3,7 @@
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx"
                 toolTip="Actor name"
-                toolTipCreate="createCustomTip(event)"
+                toolTipCreate="createCustomTip(event)" 
                 autoDrawBackground="false" 
 				filters="{[bgGlow]}" y="1000" x="400"
 				>
@@ -14,6 +14,7 @@
 	<fx:Script>
 		<![CDATA[
             import models.Actor;
+            
             import mx.events.ToolTipEvent;
             import mx.managers.ToolTipManager;
             
@@ -24,7 +25,11 @@
 				var tip:ActorToolTip = new ActorToolTip();
 				tip.actor = data as Actor;
 				event.toolTip = tip;
+                tip.height = 75;
+                tip.width = 220 + 75 + 20;
 			}
+
+
 		]]>
 	</fx:Script>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" width="880" minHeight="600"
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="880" height="820"
 			   creationComplete="application1_creationCompleteHandler(event)" mouseUp="application1_mouseUpHandler(event)" xmlns:vis="sparkflare.vis.*" xmlns:mappers="sparkflare.mappers.*" xmlns:local="*" xmlns:util="org.juicekit.util.*"
 			   >
 
@@ -268,7 +268,9 @@
 	<fx:Style source="TopEarners.css"/>
 	
     <s:Label fontFamily="TopBody" fontWeight="bold" color="0x333333" text="Explore TVs Top Earners" top="10" left="60" fontSize="26"/>
-	<s:VGroup width="855" top="60" left="5">
+    <s:Label x="60" y="38" text="See how per episode earnings for 75 actors compare, click and hold on a group to compare men vs women" styleName="notes" fontSize="14"/>
+
+    <s:VGroup width="855" top="65" left="5">
 		<s:HGroup width="100%" verticalAlign="middle">
 			<s:Label text="Group by" styleName="notes"/>
 			<s:ButtonBar id="groupByBar" dataProvider="{binUtil.groupingLabels}" change="buttonbar1_changeHandler(event)" />
@@ -336,7 +338,6 @@
         
     </s:Group>
 	
-    <s:Label x="60" y="745" text="Click and hold on a group to compare men vs women" styleName="notes" fontSize="15"/>
 	<vis:VisualizationDataGroup id="genderBinVisualizationDataGroup" left="60" top="140" dataProvider="{genderBinProvider}" itemRenderer="BinItemRenderer" transitionPeriod="0">
 		<mappers:MapperChain>
 			<mappers:PropertyMapper targetValues="{{alpha: 0}}"/>

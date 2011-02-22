@@ -13,6 +13,8 @@ package
 		{
 			super();
 			addHandler();
+//            this.width = 220;
+//            this.height = 64;
 		}
 		
 		public var _text:String;
