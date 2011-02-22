@@ -22,27 +22,15 @@ package
 		//------------------------------------------------------------
 		
 		/**
-		 * the maxium radius the items can be sized to
+		 * the padding on either side of the bin
 		 */
-		[Bindable] public var maxRadius:int = 100;
+		[Bindable] public var bpadding:int = 0;
+		
+
+        [Bindable] public var bin:Object;
 		
 		/**
-		 * the padding between the bubbles
-		 */
-		[Bindable] public var bpadding:int = 10;
-		
-		/**
-		 * the property of the data that will be used to
-		 * size the bubbles
-		 */
-		[Bindable] public var sizeField:String;
-		
-		[Bindable] public var groupbyField:String;
-		
-		[Bindable] public var bin:Object;
-		
-		/**
-		 * the width of the bin the items will
+		 * the height of the bin the items will
 		 * be placed in
 		 */
 		public var binHeight:int = 600;
@@ -62,40 +50,34 @@ package
 			
 			if (enabled) {
 				_t = (t != null ? t : Transitioner.DEFAULT);
-				//_t.easing = Easing.easeOutExpo;
 				
 				if (items)
 				{
-					var allGroups:Array = new Array();
-					var maxSize:Number = Number.NEGATIVE_INFINITY;
-					var sizeProp:Property = Property.$(sizeField);
-					var groupProp:Property = Property.$(groupbyField);
-					
-					layoutBin2(bin.bubblexPos, items, _t, bin.width);
+					layoutBin(bin.bubblexPos, bin.width, items, _t);
 				}
 				
 			}
 			
 		}
 		
-		private function layoutBin2(bubblexPos:int, binArray:ArrayCollection, _t:Transitioner, binWidth:Number):void
+		private function layoutBin(bubblexPos:int, binWidth:Number, bubbleArray:ArrayCollection, _t:Transitioner):void
 		{
-			var row:Object
+			var bubble:Object;
 			var above:Array = [];
-			for each (row in binArray) 
+			for each (bubble in bubbleArray) 
 			{
-				var minVal:Number = bubblexPos + bpadding + _t.$(row)['size']/2;
-				var maxVal:Number = bubblexPos + binWidth - bpadding - _t.$(row)['size']/2;
+				var minVal:Number = bubblexPos + bpadding + _t.$(bubble)['size']/2;
+				var maxVal:Number = bubblexPos + binWidth - bpadding - _t.$(bubble)['size']/2;
 				
 				var hasOverlap:Boolean = true;
 				var iters:int = 0;
 				while (hasOverlap && iters < 10) 
 				{
 					hasOverlap = false;
-					_t.setValue(row, 'x', minVal + Math.random()*(maxVal - minVal));
+					_t.setValue(bubble, 'x', randomInRange(minVal, maxVal));
 					
 					for each (var otherRow:Object in above) {
-						if (overlaps(_t, row, otherRow))
+						if (overlaps(_t, bubble, otherRow))
 						{
 							hasOverlap = true;
 							break;
@@ -103,7 +85,7 @@ package
 					} 
 					iters += 1;
 				}
-				above.push(row);
+				above.push(bubble);
 			}
 		}
 		
