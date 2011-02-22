@@ -83,9 +83,10 @@
 		<s:HGroup>
 			<mx:Image source="{this.hostComponent.actorImage}"/>
 
-			<s:VGroup width="200" paddingTop="5" paddingBottom="5" paddingRight="10">
-				<s:Label text="{Strings.format('{actor.name}', this.hostComponent)}" fontSize="24" width="100%"/>
-				<s:Label text="{Strings.format('Earns {actor.pay:$#,##0} per episode of {actor.showName}', this.hostComponent)}" fontSize="14" color="0x999999" width="100%"/>
+			<s:VGroup width="220" height="64" paddingTop="5" paddingBottom="5" paddingRight="10" gap="4">
+				<s:Label text="{Strings.format('{actor.name}', this.hostComponent)}" fontFamily="TopBody" fontSize="18" width="100%"/>
+                <s:Label text="{Strings.format('Earns {actor.pay:$#,##0} per episode of {actor.showName} on {actor.network}', this.hostComponent)}" fontSize="14" color="0x666666" width="100%" lineHeight="15"/>
+                <s:Label text="{Strings.format('Season: {actor.season}, IMDB Rating: {actor.imdbRating}', this.hostComponent)}" fontSize="12" color="0x999999" width="100%"/>
 			</s:VGroup>
 		</s:HGroup>
     </s:Group>

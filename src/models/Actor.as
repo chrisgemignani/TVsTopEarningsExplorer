@@ -1,4 +1,4 @@
-package
+package models
 {
     [Bindable]
 	public class Actor
@@ -20,6 +20,10 @@ package
 		public var gender:String;
 		
 		public var network:String;
+        
+        public var season:String;
+        
+        public var imdbRating:String;
 
 		public var seasonBin:String;
 		

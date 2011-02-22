@@ -4,6 +4,7 @@ package
 	import mx.events.FlexEvent;
 	
 	import spark.components.SkinnableContainer;
+	import models.Actor;
 
 	
 	public class ActorToolTip extends SkinnableContainer implements IToolTip
