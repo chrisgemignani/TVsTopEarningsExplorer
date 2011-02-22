@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="false">
+	
+	<fx:Script>
+		<![CDATA[
+			import org.juicekit.util.Colors;
+			import org.juicekit.util.Strings;
+			[Bindable] public var w:int = 0;
+			
+			[Bindable] public var color:uint = 0xcccccc;
+			
+			//[Bindable] public var showGender:Boolean = false;
+			
+			//[Bindable] public var malePct:Number = 1;
+			
+			override public function set data(o:Object):void {
+				super.data = o;
+				if (o && o.hasOwnProperty('gender')) {
+					if (o.gender == 'Male') {
+						groupLabel.text = "M";
+						color = 0x0033cc;
+					} else {
+						groupLabel.text = "F";
+						color = 0xff6666;
+					}
+				} else {
+					color = 0xcccccc;
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<fx:Array id="insetGlow">
+			<s:DropShadowFilter color="{color}" alpha="1" blurX="-2" blurY="-2" strength="5" quality="6"/>
+		</fx:Array>
+	</fx:Declarations>
+	
+	<s:Rect x="0" y="0" width="{w}" height="600" id="bin">
+		<s:fill>
+			<s:SolidColor color="{color}" alpha="0.2"/>
+		</s:fill>
+	</s:Rect>
+
+	<s:Rect id="averageRect" bottom="0" width="{w}" height="200">
+		<s:fill>
+			<s:SolidColor color="{Colors.darken(color,0.3)}" alpha="0.2"/>
+		</s:fill>
+	</s:Rect>
+
+	<s:Rect y="{averageRect.y}" width="{w}" height="2">
+		<s:fill>
+			<s:SolidColor color="0xffffff" alpha="1"/>
+		</s:fill>
+	</s:Rect>
+	
+	
+	<s:Label fontSize="30" x="3" y="5" color="0xffffff" id="groupLabel" text="{data.group}" maxWidth="{w}" filters="{insetGlow}" fontFamily="TopBlack"/>
+	
+	<s:Label fontSize="16" x="3" y="{averageRect.y - 20}" fontWeight="normal" color="0x333333" text="{Strings.format('{0:$#,##0}', data.averagePay)}" maxWidth="{w}" visible="{this.width > 50}" fontFamily="TopLight"/>
+	
+	
+</s:ItemRenderer>

@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="880" minHeight="600"
+			   creationComplete="application1_creationCompleteHandler(event)" mouseUp="application1_mouseUpHandler(event)" xmlns:vis="sparkflare.vis.*" xmlns:mappers="sparkflare.mappers.*" xmlns:local="*" xmlns:util="org.juicekit.util.*"
+			   >
+
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			import org.juicekit.animate.TransitionEvent;
+			import org.juicekit.animate.Transitioner;
+			import org.juicekit.animate.Tween;
+			import org.juicekit.data.converter.DelimitedTextConverter;
+			import org.juicekit.util.Arrays;
+			import org.juicekit.util.Sort;
+			
+			import spark.components.supportClasses.ItemRenderer;
+			import spark.events.IndexChangeEvent;
+			
+			[Bindable] public var binProvider:ArrayCollection = new ArrayCollection();
+			[Bindable] public var genderBinProvider:ArrayCollection = new ArrayCollection();
+			[Bindable] public var dataProvider:ArrayCollection = new ArrayCollection();
+			[Bindable] public var binGroupings:Array = new Array();
+			
+			[Bindable]
+			public var binUtil:BinUtil;
+			
+			[Bindable] public var selectedGroup:String = null;
+			
+			public var currentGroup:String;
+
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				loadData();
+			}
+			
+			protected function loadData():void
+			{
+				var loader:URLLoader = new URLLoader();
+				
+				loader.addEventListener(Event.COMPLETE, resultHandler);
+				loader.addEventListener(IOErrorEvent.IO_ERROR, faultHandler);
+				
+				loader.load(new URLRequest('../resources/data/top-tv-earners.csv'));
+			}
+			
+			protected function faultHandler(event:Event):void
+			{
+				
+			}
+			
+			protected function resultHandler(event:Event):void
+			{
+				var loaderData:* = URLLoader(event.target).data as String;
+				var rawData:Array = new DelimitedTextConverter(',').parse(loaderData).nodes.data;
+				
+				rawData.sort(Sort.$(['-PayPerEpisode']));
+				
+				var results:ArrayCollection = new ArrayCollection();
+				var row:Object;
+				for each(row in rawData)
+				{
+					var actor:Actor = new Actor();
+					actor.name = row.Actor;
+					actor.showName = row.Show;
+					actor.pay = row.PayPerEpisode;
+					actor.showType = row.ShowType;
+					actor.gender = row.Gender;
+					actor.network = row.Network;
+					actor.networkTop5 = row.NetworkTop5;
+					if (int(row.Season) < 3) {
+						actor.seasonBin = '1-2';
+					} else if (int(row.Season) < 7) {
+						actor.seasonBin = '3-6';
+					} else {
+						actor.seasonBin = '7+';
+					}
+					if (Number(row.IMDBRating) < 7.5) {
+						actor.ratingBin = '<7.5';
+					} else if (Number(row.IMDBRating) < 8.5) {
+						actor.ratingBin = '7.5-8.5';
+					} else {
+						actor.ratingBin = '8.5+';
+					}
+					
+					results.addItem(actor);
+				}
+				
+				dataProvider = results;
+				dataProvider.refresh();
+				
+				binUtil = new BinUtil(dataProvider);
+				setupData('showType');
+				currentGroup = 'showType';
+				groupByBar.selectedIndex = 0;
+			}
+			
+			protected function setupData(g:String):void
+			{
+				genderBinProvider.source = binUtil.allGroupings[g+'Gender'];
+				binProvider.source = binUtil.allGroupings[g];
+				binGroupings = binUtil.allGroupings;
+			}
+			
+			protected function groupBy(g:String,index:int):void
+			{
+				setupData(g);
+				currentGroup = g;
+				bubbleSwitch.selectedIndex = index;
+			}
+			
+
+			private var mouseDownTransitioner:Transitioner = new Transitioner(1);
+			private var mouseUpTransitioner:Transitioner = new Transitioner(1);
+			private var mouseDownImmedTransitioner:Transitioner = new Transitioner(0);
+			private var mouseUpImmedTransitioner:Transitioner = new Transitioner(0);
+			protected function visualizationdatagroup1_mouseDownHandler(event:MouseEvent):void
+			{
+				trace(event.stageX, event.stageY);
+				var selectedBin:Object;
+				// The bins have 50px padding on their left
+				var xpos:int = event.stageX - 50;
+				for each (var b:Object in binProvider) {
+					if (xpos >= b.bubblexPos && xpos <= (b.bubblexPos + b.width)) {
+						selectedBin = b;
+						break;
+					}
+				}
+				
+				if (selectedBin) {
+					for (var idx:int = 0; idx<binVisualizationDataGroup.numElements; idx++) {
+						var ir:BinItemRenderer = binVisualizationDataGroup.getElementAt(idx) as BinItemRenderer;
+						if (ir.data.group == selectedBin.group) {
+							trace('found bin itemrenderer', b.group);
+							mouseDownTransitioner = new Transitioner(0.5);
+							mouseUpTransitioner = new Transitioner(0.5);
+							mouseDownImmedTransitioner = new Transitioner(0);
+							mouseUpImmedTransitioner = new Transitioner(0);
+
+							// Hide the current bin
+							mouseDownImmedTransitioner.setValue(ir, 'alpha', 0);
+
+							// Collect the affected men and women bubbles
+							var selectedMen:ArrayCollection = new ArrayCollection();
+							var selectedWomen:ArrayCollection = new ArrayCollection();
+							for (var bubbleIdx:int = 0; bubbleIdx<bubbleVisualizationDataGroup.numElements; bubbleIdx++) {
+								var bub:BubbleItemRenderer = bubbleVisualizationDataGroup.getElementAt(bubbleIdx) as BubbleItemRenderer;
+								
+								if (bub.data[currentGroup] == selectedBin.group) {
+									if (bub.data.gender == 'Male') {
+										selectedMen.addItem(bub);
+									} else {
+										selectedWomen.addItem(bub);
+									}
+									
+									
+								}
+							}
+								
+							// Find the male and female bins and make sure they're positioned correctly
+							var tempBins:ArrayCollection = new ArrayCollection();									
+							var maleBin:Object;
+							var femaleBin:Object;
+							tempBins.source = binUtil.allGroupings[currentGroup+'Gender'];
+							for each (var o:Object in tempBins) {
+								if (o.group == selectedBin.group && o.gender == 'Male') {
+									maleBin = o;
+								}
+								if (o.group == selectedBin.group && o.gender == 'Female') {
+									femaleBin = o;
+								}
+							}
+							
+							// Operate on the male and female bubbles
+							var bubLayout:SingleBinBubbleLayout = new SingleBinBubbleLayout();
+							bubLayout.bin = maleBin;
+							maleBin.bubblexPos = selectedBin.bubblexPos;
+							bubLayout.operate(selectedMen, mouseDownTransitioner);
+							for each (var rend:ItemRenderer in selectedMen) {
+								mouseUpTransitioner.setValue(rend, 'x', rend.x);
+							}
+							
+							var bubLayout:SingleBinBubbleLayout = new SingleBinBubbleLayout();
+							bubLayout.bin = femaleBin;
+							femaleBin.bubblexPos = maleBin.bubblexPos + maleBin.width;
+							bubLayout.operate(selectedWomen, mouseDownTransitioner);
+							for each (var rend:ItemRenderer in selectedWomen) {
+								mouseUpTransitioner.setValue(rend, 'x', rend.x);
+							}
+							
+							// Display the gender bins
+							for (var gendBubIdx:int = 0; gendBubIdx<genderBinVisualizationDataGroup.numElements; gendBubIdx++) {
+								var gendBin = genderBinVisualizationDataGroup.getElementAt(gendBubIdx) as BinItemRenderer;
+								
+								if (gendBin.data.group == selectedBin.group) {
+									if (gendBin.data.gender == 'Male') {
+										gendBin.data.bubblexPos = maleBin.bubblexPos;
+										gendBin.data.width = maleBin.width;
+									} else {										
+										gendBin.data.bubblexPos = femaleBin.bubblexPos;
+										gendBin.data.width = femaleBin.width;
+									}
+									gendBin.x = gendBin.data.bubblexPos;
+									gendBin.width = gendBin.data.width;
+									mouseDownImmedTransitioner.setValue(gendBin, 'alpha', 1);
+									mouseUpImmedTransitioner.setValue(gendBin, 'alpha', 0);
+								}
+							}
+								
+							mouseUpImmedTransitioner.setValue(ir, 'alpha', 1);
+							mouseUpTransitioner.addEventListener(TransitionEvent.END, function(e:TransitionEvent):void {
+								mouseUpTransitioner = null;
+								mouseUpImmedTransitioner = null;
+							});
+							mouseDownImmedTransitioner.play();
+							mouseDownTransitioner.play();
+						}
+					}
+					trace('found selected bin!!', b.group);
+				}
+			}
+
+			protected function application1_mouseUpHandler(event:MouseEvent):void
+			{
+				if (mouseUpTransitioner) {
+					trace('playing mouse up transitioner');
+					mouseUpTransitioner.play();
+					
+					//mouseUpTransitioner.dispose()
+					
+				}
+				if (mouseUpImmedTransitioner) {
+					mouseUpImmedTransitioner.play();
+				}
+			}
+			
+
+			protected function buttonbar1_changeHandler(event:IndexChangeEvent):void
+			{
+				groupBy(binUtil.groupings[event.newIndex], event.newIndex);
+			}
+			
+			protected function colorByBar_changeHandler(event:IndexChangeEvent):void
+			{
+				colorMapper.groupField = binUtil.colorings[event.newIndex];
+			}
+
+
+		]]>
+	</fx:Script>
+	
+	<fx:Style source="TopEarners.css"/>
+	
+	<s:VGroup width="100%" top="10">
+		<s:HGroup width="100%" verticalAlign="middle">
+			<s:Label text="Group by" styleName="notes"/>
+			<s:ButtonBar id="groupByBar" dataProvider="{binUtil.groupingLabels}" change="buttonbar1_changeHandler(event)" />
+			<mx:Spacer width="100%"/>
+			<s:Label text="Color by" styleName="notes"/>
+			<s:ButtonBar id="colorByBar" dataProvider="{binUtil.coloringLabels}" change="colorByBar_changeHandler(event)" />
+		</s:HGroup>
+	</s:VGroup>
+	
+	<!--	
+	Layout for the bins
+	-->
+	<vis:VisualizationDataGroup id="binVisualizationDataGroup" left="50" top="100" dataProvider="{binProvider}" itemRenderer="BinItemRenderer" transitionPeriod="1">
+		<mappers:MapperChain>
+			<mappers:Mapper sourceField="data.averagePay" sourceMin="0" sourceMax="700000" targetField="averageRect.height" targetMin="0" targetMax="600"/>
+			<local:BinLayout />
+		</mappers:MapperChain>
+	</vis:VisualizationDataGroup>
+	
+	<vis:VisualizationDataGroup id="genderBinVisualizationDataGroup" left="50" top="100" dataProvider="{genderBinProvider}" itemRenderer="BinItemRenderer" transitionPeriod="0">
+		<mappers:MapperChain>
+			<mappers:PropertyMapper targetValues="{{alpha: 0}}"/>
+			<!--
+			-->
+			<mappers:Mapper sourceField="data.averagePay" sourceMin="0" sourceMax="700000" targetField="averageRect.height" targetMin="0" targetMax="600"/>
+			<local:BinLayout />
+		</mappers:MapperChain>
+	</vis:VisualizationDataGroup>
+	
+	<vis:VisualizationDataGroup id="bubbleVisualizationDataGroup" left="50" top="100" dataProvider="{dataProvider}" itemRenderer="BubbleItemRenderer" transitionPeriod="2" mouseDown="visualizationdatagroup1_mouseDownHandler(event)">
+		<mappers:MapperChain>
+			<mappers:Mapper sourceField="data.pay" sourceMin="0" sourceMax="700000" targetField="y" targetMin="600" targetMax="0"/>
+			<mappers:MapperSwitch id="bubbleSwitch">
+				<local:BubbleLayout groupbyField="data.showType" sizeField="data.pay" binProvider="{binGroupings}"/>
+				<local:BubbleLayout groupbyField="data.gender" sizeField="data.pay" binProvider="{binGroupings}" />
+				<local:BubbleLayout groupbyField="data.networkTop5" sizeField="data.pay" binProvider="{binGroupings}" bpadding="3"/>
+				<local:BubbleLayout groupbyField="data.seasonBin" sizeField="data.pay" binProvider="{binGroupings}" bpadding="3"/>
+				<local:BubbleLayout groupbyField="data.ratingBin" sizeField="data.pay" binProvider="{binGroupings}" bpadding="3"/>
+			</mappers:MapperSwitch>
+			
+			<mappers:MapperSwitch id="colorSwitch">
+				<local:GroupColorMapper id="colorMapper"/>
+				<mappers:ColorMapper sourceField="data.pay" sourceMin="0" sourceMax="500000" palette="RdYlGn" targetField="entry.color"/>
+				<mappers:ColorMapper sourceField="data.gender" sourceMin="M" sourceMax="F" palette="RdYlGn" targetField="entry.color"/>
+			</mappers:MapperSwitch>
+		</mappers:MapperChain>
+	</vis:VisualizationDataGroup>
+	<!--<s:Button label="switch" click="bubbleSwitch.selectedIndex = 1;"/>-->
+</s:Application>

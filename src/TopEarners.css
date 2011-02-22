@@ -1,0 +1,39 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+@font-face {
+  src: url("../resources/fonts/FrutigerLTStd-Roman.otf");
+  fontFamily: TopBody;
+  embedAsCFF: true;
+}
+
+@font-face {
+	src: url("../resources/fonts/FrutigerLTStd-Bold.otf");
+	fontFamily: TopBody;
+	fontWeight: bold;
+	embedAsCFF: true;
+}
+
+@font-face {
+	src: url("../resources/fonts/FrutigerLTStd-Light.otf");
+	fontFamily: TopLight;
+	embedAsCFF: true;
+}
+
+@font-face {
+	src: url("../resources/fonts/FrutigerLTStd-Black.otf");
+	fontFamily: TopBlack;
+	embedAsCFF: true;
+}
+
+.notes {
+	color: #999999;
+	font-size: 12;
+}
+
+
+* {
+	font-family: TopLight;
+	font-size: 12;
+}

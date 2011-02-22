@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" autoDrawBackground="false" 
+				xmlns:mx="library://ns.adobe.com/flex/mx"
+				mouseOver="itemrenderer1_mouseOverHandler(event)" toolTip="Actor name"
+				mouseOut="itemrenderer1_mouseOutHandler(event)" toolTipCreate="createCustomTip(event)"
+				filters="{[bgGlow]}" y="1000" x="400"
+				>
+	<fx:Declarations>
+		<mx:GlowFilter id="bgGlow" blurX="6" blurY="6" quality="6" color="{0x666666}" alpha=".25"/>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.ToolTipEvent;
+			
+			import org.juicekit.util.Colors;
+			[Bindable] public var size:Number = 20;
+
+			protected function itemrenderer1_mouseOverHandler(event:MouseEvent):void
+			{
+				this.currentState = 'hover';
+			}
+
+
+			protected function itemrenderer1_mouseOutHandler(event:MouseEvent):void
+			{
+				this.currentState = 'normal';
+			}
+			
+			
+			private function createCustomTip(event:ToolTipEvent):void {
+				var ptt:ActorToolTip = new ActorToolTip();
+				ptt.actor = data as Actor;
+				event.toolTip = ptt;
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Ellipse id="bubble" x="{-size/2}" y="{-size/2}" width="{size}" height="{size}">
+		<s:fill>
+			<s:RadialGradient x="{size/4}" y="{size/4}">
+				<s:GradientEntry color="#ffffff" alpha="0.15" alpha.hover=".6"/>
+				<s:GradientEntry id="entry" color="#5cb4cf" alpha="0.30" alpha.hover=".95"/>
+			</s:RadialGradient>
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="#ffffff" weight="1" color.hover="{Colors.lighten(entry.color, 0.2)}"/>
+		</s:stroke>
+	</s:Ellipse>
+	<s:Label alpha="0.7" alpha.hover="0.9" fontSize="13" color="black" color.hover="{Colors.whiteOrBlack(entry.color)}" text="{data.name.split(' ')[0]}" x="{-size/2}" y="{-5}" width="{size}" textAlign="center" includeInLayout="{size>40}" fontFamily="TopLight"/>
+
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="hover"/>
+	</s:states>
+</s:ItemRenderer>
