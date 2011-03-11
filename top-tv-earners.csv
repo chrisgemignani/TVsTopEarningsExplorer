@@ -1,0 +1,73 @@
+Actor,Show,PayPerEpisode,ShowType,Network,Season,Gender,Avg viewers (2009-10 season),IMDBRating,NetworkTop5
+Dana Delany,Body of Proof,150000,Drama,ABC,1,Female,,8.2,ABC
+Nathan Fillion,Castle,100000,Drama,ABC,3,Male,10.5,8.6,ABC
+Cole Hauser,Chase,100000,Drama,ABC,1,Male,,6.4,ABC
+Marcia Cross,Desperate Housewives,400000,Comedy,ABC,7,Female,14.1,7.9,ABC
+Teri Hatcher,Desperate Housewives,400000,Comedy,ABC,7,Female,14.1,7.9,ABC
+Felicity Huffman,Desperate Housewives,400000,Comedy,ABC,7,Female,14.1,7.9,ABC
+Eva Longoria,Desperate Housewives,400000,Comedy,ABC,7,Female,14.1,7.9,ABC
+Patrick Dempsey,Greys Anatomy,250000,Drama,ABC,7,Male,13.6,7.3,ABC
+Ed O'Neill,Modern Family,100000,Comedy,ABC,2,Male,9.5,9.1,ABC
+Ty Burrell,Modern Family,50000,Comedy,ABC,2,Male,9.5,9.1,ABC
+Rico Rodriguez,Modern Family,15000,Comedy,ABC,2,Male,9.5,9.1,ABC
+Shailene Woodley,The Secret Life of the American Teenager,40000,Drama,ABC Family,3,Female,,5.3,Cable
+Jon Hamm,Mad Men,100000,Drama,AMC,4,Male,,9,Cable
+William Shatner,$#*! My Dad Says,150000,Comedy,CBS,1,Male,,6.3,CBS
+Tom Selleck,Blue Bloods,125000,Drama,CBS,1,Male,,8.2,CBS
+Joe Mantegna,Criminal Minds,125000,Drama,CBS,6,Male,13.6,8.4,CBS
+Thomas Gibson,Criminal Minds,100000,Drama,CBS,6,Male,13.6,8.4,CBS
+Marg Helgenberger,CSI,375000,Drama,CBS,11,Female,15.8,8.4,CBS
+Laurence Fishburne,CSI,350000,Drama,CBS,11,Male,15.8,8.4,CBS
+David Caruso,CSI: Miami,375000,Drama,CBS,9,Male,12.6,6.6,CBS
+Gary Sinise,CSI: NY,275000,Drama,CBS,7,Male,12.3,7,CBS
+Alex O'Loughlin,Hawaii Five-O,100000,Drama,CBS,1,Male,,7.9,CBS
+Scott Caan,Hawaii Five-O,80000,Drama,CBS,1,Male,,7.9,CBS
+Mark Harmon,NCIS,375000,Drama,CBS,8,Male,18.7,8,CBS
+Michael Weatherly,NCIS,125000,Drama,CBS,8,Male,18.7,8,CBS
+LL Cool J,NCIS: Los Angeles,125000,Drama,CBS,2,Male,15.7,7.1,CBS
+Chris O'Donnell,NCIS: Los Angeles,125000,Drama,CBS,2,Male,15.7,7.1,CBS
+David Spade,Rules of Engagement,150000,Comedy,CBS,5,Male,8.5,7.7,CBS
+Patrick Warburton,Rules of Engagement,85000,Comedy,CBS,5,Male,8.5,7.7,CBS
+Kaley Cuoco,The Big Bang Theory,60000,Comedy,CBS,4,Female,14.2,8.8,CBS
+Johnny Galecki,The Big Bang Theory,60000,Comedy,CBS,4,Male,14.2,8.8,CBS
+Jim Parsons,The Big Bang Theory,40000,Comedy,CBS,4,Male,14.2,8.8,CBS
+Julianna Margulies,The Good Wife,175000,Drama,CBS,2,Female,12.8,8.3,CBS
+Charlie Sheen,Two and a Half Men,1250000,Comedy,CBS,8,Male,14.6,7.9,CBS
+Jon Cryer,Two and a Half Men,550000,Comedy,CBS,8,Male,14.6,7.9,CBS
+Angus T. Jones,Two and a Half Men,250000,Comedy,CBS,8,Male,14.6,7.9,CBS
+Ashley Tisdale,Hellcats,30000,Drama,CW,1,Female,,6.9,Cable
+Ian Somerhalder,The Vampire Diaries,40000,Drama,CW,2,Male,3.5,8.1,Cable
+Dylan Sprouse,The Suite Life of Zack and Cody,20000,Comedy,Disney,3,Male,,5.9,Cable
+Cole Sprouse,The Suite Life of Zack and Cody,20000,Comedy,Disney,3,Male,,5.9,Cable
+Selena Gomez,Wizards of Waverly Place,30000,Comedy,Disney,4,Female,,7.7,Cable
+David Boreanaz,Bones,200000,Drama,Fox,6,Male,10.5,8.4,Fox
+Jane Lynch,Glee,50000,Comedy,Fox,2,Female,9.8,8.4,Fox
+Matthew Morrison,Glee,30000,Comedy,Fox,2,Male,9.8,8.4,Fox
+Hugh Laurie,House M.D.,400000,Drama,Fox,7,Male,12.6,9,Fox
+Dan Castellaneta,The Simpsons,400000,Comedy,Fox,22,Male,7.2,9,Fox
+Julie Kavner,The Simpsons,400000,Comedy,Fox,22,Female,7.2,9,Fox
+Timothy Olyphant,Justified,100000,Drama,Fx,2,Male,,8.8,Cable
+Denis Leary,Rescue Me,350000,Drama,Fx,6,Male,,8.2,Cable
+Jeremy Piven,Entourage,350000,Comedy,HBO,8,Male,,9.1,Cable
+Kevin Dillon,Entourage,200000,Comedy,HBO,8,Male,,9.1,Cable
+Adrian Grenier,Entourage,200000,Comedy,HBO,8,Male,,9.1,Cable
+Anna Paquin,True Blood,75000,Drama,HBO,4,Female,,8.4,Cable
+Tina Fey,30 Rock,350000,Comedy,NBC,5,Female,6.7,8.5,NBC
+Zachary Levi,Chuck,60000,Drama,NBC,4,Male,6.4,8.5,NBC
+Christopher Meloni,Law & Order: SVU,395000,Drama,NBC,12,Male,8.3,8.5,NBC
+Mariska Hargitay,Law & Order: SVU,395000,Drama,NBC,12,Female,8.3,8.5,NBC
+Jimmy Smits,Outlaw,150000,Drama,NBC,1,Male,,5.2,NBC
+Lauren Graham,Parenthood,150000,Drama,NBC,2,Female,7.7,8.3,NBC
+Blair Underwood,The Event,75000,Drama,NBC,1,Male,,7.4,NBC
+Steve Carell,The Office,297000,Comedy,NBC,7,Male,8.7,9.3,NBC
+Miranda Cosgrove,iCarly,180000,Comedy,Nickelodeon,4,Female,,6.7,Cable
+David Duchovny,Californication,200000,Comedy,Showtime,4,Male,,8.8,Cable
+Edie Falco,Nurse Jackie,175000,Comedy,Showtime,3,Female,,8.1,Cable
+Jada Pinkett Smith,HawthoRNe,150000,Drama,TNT,2,Female,,5.8,Cable
+Jason Lee,Memphis Beat,125000,Drama,TNT,1,Male,,7.8,Cable
+Angie Harmon,Rizzoli & Isles,75000,Drama,TNT,1,Female,,7.7,Cable
+Kyra Sedgwick,The Closer,350000,Drama,TNT,6,Female,,7.6,Cable
+Betty White,Hot in Cleveland,75000,Comedy,TV Land,2,Female,,7.1,Cable
+Jeffrey Donovan,Burn Notice,200000,Drama,USA,6,Male,,8.3,Cable
+Mark Feuerstein,Royal Pains,125000,Drama,USA,2,Male,,7.8,Cable
+Matt Bomer,White Collar,100000,Drama,USA,2,Male,,8.6,Cable

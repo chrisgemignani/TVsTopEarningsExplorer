@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fxpProperties abbreviated="false" authoringTool="Flex Builder" compiles="true" parentProject="1a26bb00-d3d2-4495-aa98-ece289bf12bc" projectUUID="1a26bb00-d3d2-4495-aa98-ece289bf12bc" sdkVersion="4.1.0" uuid="a536e5e8-0b98-4fdc-ab4d-f72772ad02b0" version="4">
+  <projects/>
+  <src/>
+  <swc>
+    <linked location="sdkPlaceHolder" path="sdkPlaceHolder" position="0" uuid="a536e5e8-0b98-4fdc-ab4d-f72772ad02b0"/>
+    <linked location="/libs" path="\libs" position="1" uuid="a536e5e8-0b98-4fdc-ab4d-f72772ad02b0"/>
+  </swc>
+  <misc/>
+  <theme/>
+</fxpProperties>
