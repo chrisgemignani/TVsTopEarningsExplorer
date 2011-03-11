@@ -1,0 +1,73 @@
+Actor,Show,PayPerEpisode,ShowType,Gender
+Charlie Sheen,Two and a Half Men,1250000,Comedy,M
+Jon Cryer,Two and a Half Men,550000,Comedy,M
+Hugh Laurie,House,400000,Drama,M
+Marica Cross,Desperate Housewives,400000,Comedy,F
+Teri Hatcher,Desperate Housewives,400000,Comedy,F
+Felicity Huffman,Desperate Housewives,400000,Comedy,F
+Eva Longoria,Desperate Housewives,400000,Comedy,F
+Dan Castellaneta,The Simpsons,400000,Comedy,M
+Julie Kavner,The Simpsons,400000,Comedy,F
+Christopher Meloni,Law & Order: SVU,395000,Drama,M
+Mariska Hargitay,Law & Order: SVU,395000,Drama,F
+David Caruso,CSI: Miami,375000,Drama,M
+Marg Helgenberger,CSI,375000,Drama,M
+Mark Harmon,NCIS,375000,Drama,M
+Laurence Fishburne,CSI,350000,Drama,M
+Kyra Sedwick,The Closer,350000,Drama,F
+Denis Leary,Rescue Me,350000,Drama,M
+Tina Fey,30 Rock,350000,Comedy,F
+Jeremy Piven,Entourage,350000,Comedy,M
+Steve Carell,The Office,297000,Comedy,M
+Gary Sinise,CSI: NY,275000,Drama,M
+Patrick Dempsey,Greys Anatomy,250000,Drama,M
+Angus T. Jones,Two and Half Men,250000,Comedy,F
+David Boreanaz,Bones,200000,Drama,F
+Jeffrey Donovan,Burn Notice,200000,Drama,M
+David Duchovny,Californication,200000,Comedy,M
+Kevin Dillon,Entourage,200000,Comedy,M
+Adrian Grenier,Entourage,200000,Comedy,M
+Miranada Cosgrove,iCarly,180000,Comedy,F
+Julianna Margulies,The Good Wife,175000,Drama,F
+Edie Falco,Nurse Jackie,175000,Comedy,M
+Dana Delany,Body of Proof,150000,Drama,F
+Lauren Graham,Parenthood,150000,Drama,F
+Jada Pinkett Smith,HawthoRNe,150000,Drama,F
+Jimmy Smits,Outlaw,150000,Drama,M
+William Shatner,$#*! My Dad Says,150000,Comedy,M
+David Spade,Rules of Engagement,150000,Comedy,M
+LL Cool J,NCIS: Los Angeles,125000,Drama,M
+Chris O'Donnell,NCIS: Los Angeles,125000,Drama,M
+Mark Feuerstein,Royal Pains,125000,Drama,M
+Jason Lee,Memphis Beat,125000,Drama,M
+Joe Mantegna,Criminal Minds,125000,Drama,M
+Tom Selleck,Blue Blods,125000,Drama,M
+Michael Weatherly,NCIS,125000,Drama,M
+Matt Bomer,White Collar,100000,Drama,M
+Nathan Fillion,Castle,100000,Drama,M
+Thomas Gibson,Criminal Minds,100000,Drama,M
+Jon Hamm,Mad Men,100000,Drama,M
+Cole Hauser,Chase,100000,Drama,M
+Alex O'Loughlin,Hawaii Five-O,100000,Drama,M
+Timothy Olyphant,Justified,100000,Drama,M
+Ed O'Neil,Hot in Cleveland,100000,Comedy,M
+Patrick Warburton,Rules of Engagement,85000,Comedy,M
+Scott Caan,Hawaii Five-O,80000,Drama,M
+Angie Harmon,Rizzoli & Isles,75000,Drama,F
+Anna Paquin,True Blood,75000,Drama,F
+Blair Underwood,The Event,75000,Drama,M
+Betty White,Hot in Cleveland,75000,Comedy,F
+Zachary Levi,Chuck,60000,Drama,M
+Kaley Cuoco,The Big Bang Theory,60000,Comedy,F
+Jaonny Galecki,The Big Bang Theory,60000,Comedy,M
+Ty Burrell,Modern Family,50000,Comedy,M
+Jane Lynch,Glee,50000,Comedy,F
+Ian Somerhalder,The Vampire Diaries,40000,Drama,M
+Shailene Woodley,The Secret Life of the American Teenager,40000,Drama,F
+Jim Parsons,The Big Bang Theory,40000,Comedy,M
+Ashley Tisdale,Hellcats,30000,Drama,F
+Matthew Morrison,Glee,30000,Comedy,M
+Selena Gomez,Wizards of Waverly Place,30000,Comedy,F
+Dylan Sprouse,The Suite Life of Zack and Cody,20000,Comedy,M
+Cole Sprouse,The Suite Life of Zack and Cody,20000,Comedy,M
+Rico Rodriguez,Modern Family,15000,Comedy,M
