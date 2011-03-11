@@ -4,6 +4,7 @@ package
 	
 	import org.juicekit.animate.Transitioner;
 	import org.juicekit.util.Arrays;
+	import org.juicekit.util.Colors;
 	import org.juicekit.util.Property;
 	
 	import sparkflare.mappers.MapperBase;
@@ -30,7 +31,7 @@ package
 		}
 		
 		public var defaultColor:uint = 0x666666;
-		public var genderLookup:Object = {'Male': 0x0033cc, 'Female': 0xff6666 };
+		public var genderLookup:Object = {'Male': Colors.lighten(Colors.saturate(0x354ca5)), 'Female': Colors.lighten(Colors.saturate(0xad2015)) };
 		public var networkLookup:Object = {'CBS': 0x4684ee, 'NBC': 0x008000, 'Fox': 0x4942cc, 'ABC': 0xff9900, 'Cable': 0xdc3912 };
 		
 		private function colorLookup(val:String):uint {

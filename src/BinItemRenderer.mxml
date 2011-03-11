@@ -21,10 +21,10 @@
 				if (o && o.hasOwnProperty('gender')) {
 					if (o.gender == 'Male') {
 						groupLabel.text = "M";
-						color = 0x0033cc;
+                        color = Colors.lighten(Colors.saturate(0x354ca5));
 					} else {
 						groupLabel.text = "F";
-						color = 0xff6666;
+						color = Colors.lighten(Colors.saturate(0xad2015));
 					}
 				} else {
 					color = 0xcccccc;
@@ -36,7 +36,7 @@
 	
 	<fx:Declarations>
 		<fx:Array id="insetGlow">
-			<s:DropShadowFilter color="{color}" alpha="1" blurX="-2" blurY="-2" strength="5" quality="6"/>
+			<s:DropShadowFilter color="{color}" alpha="1" blurX="-2" blurY="-2" strength="7" quality="6"/>
 		</fx:Array>
 	</fx:Declarations>
 	
@@ -48,7 +48,7 @@
 
 	<s:Rect id="averageRect" bottom="0" width="{w}" height="200">
 		<s:fill>
-			<s:SolidColor color="{Colors.darken(color,0.3)}" alpha="0.2"/>
+			<s:SolidColor color="{Colors.darken(color,0.4)}" alpha="0.25"/>
 		</s:fill>
 	</s:Rect>
 

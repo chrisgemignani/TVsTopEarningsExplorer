@@ -11,6 +11,7 @@
 	<fx:Script>
 		<![CDATA[
             import models.Actor;
+            
             import mx.collections.ArrayCollection;
             import mx.controls.Alert;
             import mx.events.FlexEvent;
@@ -50,7 +51,7 @@
 				loader.addEventListener(Event.COMPLETE, resultHandler);
 				loader.addEventListener(IOErrorEvent.IO_ERROR, faultHandler);
 				
-				loader.load(new URLRequest('../resources/data/top-tv-earners.csv'));
+				loader.load(new URLRequest('top-tv-earners.csv'));
 			}
 			
 			protected function faultHandler(event:Event):void
@@ -114,11 +115,13 @@
 				binGroupings = binUtil.allGroupings;
 			}
 			
-			protected function groupBy(g:String,index:int):void
+			protected function groupBy(g:String, index:int):void
 			{
-				setupData(g);
-				currentGroup = g;
-				bubbleSwitch.selectedIndex = index;
+				if (index != -1) {
+					setupData(g);
+					currentGroup = g;
+					bubbleSwitch.selectedIndex = index;
+				}
 			}
 			
 
@@ -130,7 +133,7 @@
             
 			protected function visualizationdatagroup1_mouseDownHandler(event:MouseEvent):void
 			{
-                if (enableMouseDown) {
+                if (enableMouseDown && currentGroup != 'gender') {
                     enableMouseDown = false;
     				trace(event.stageX, event.stageY);
     				var selectedBin:Object;
@@ -267,9 +270,14 @@
 	
 	<fx:Style source="TopEarners.css"/>
 	
-    <s:Label fontFamily="TopBody" fontWeight="bold" color="0x333333" text="Explore TVs Top Earners" top="10" left="60" fontSize="26"/>
-    <s:Label x="60" y="38" text="See how per episode earnings for 75 actors compare, click and hold on a group to compare men vs women" styleName="notes" fontSize="14"/>
+    <s:Label fontFamily="TopBlack" color="0x333333" text="Explore TV's top earners" top="10" left="60" fontSize="26"/>
+    <s:Label x="60" y="38" text="Compare per episode earnings for 72 actors" styleName="notes" fontSize="14"/>
 
+    <s:SkinnableContainer id="helpText" backgroundColor="0xff9900" x="250" y="300" height="90" depth="1000">
+        <s:Label paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="100" height="80" fontFamily="TopBody" maxWidth="500" text="Shaded areas represent average income for a group. Click and hold on a group to compare men and women." color="white" fontSize="18"/>
+        <s:Button top="5" right="5" label="Hide" alpha="0.95" scaleX="1.1" scaleY="1.1" click="helpText.visible = false"/>
+    </s:SkinnableContainer>
+    
     <s:VGroup width="855" top="65" left="5">
 		<s:HGroup width="100%" verticalAlign="middle">
 			<s:Label text="Group by" styleName="notes"/>
@@ -310,13 +318,16 @@
 	<!--	
 	Layout for the bins
 	-->
-	<vis:VisualizationDataGroup id="binVisualizationDataGroup" left="60" top="140" dataProvider="{binProvider}" itemRenderer="BinItemRenderer" transitionPeriod="1">
+	<vis:VisualizationDataGroup id="binVisualizationDataGroup" left="60" top="140" dataProvider="{binProvider}" itemRenderer="BinItemRenderer" transitionPeriod="1" >
 		<mappers:MapperChain>
 			<mappers:Mapper sourceField="data.averagePay" sourceMin="0" sourceMax="700000" targetField="averageRect.height" targetMin="0" targetMax="600"/>
 			<local:BinLayout />
 		</mappers:MapperChain>
 	</vis:VisualizationDataGroup>
     
+	<!--
+	Vertical scale labels
+	-->
     <s:Group width="60" left="0" top="140">
         <s:Label y="509" text="$100k" styleName="notes" right="13"/>
         <s:Rect height="1" width="10" y="514" left="50" fill="{new SolidColor(0x888888)}"/> 
@@ -341,14 +352,12 @@
 	<vis:VisualizationDataGroup id="genderBinVisualizationDataGroup" left="60" top="140" dataProvider="{genderBinProvider}" itemRenderer="BinItemRenderer" transitionPeriod="0">
 		<mappers:MapperChain>
 			<mappers:PropertyMapper targetValues="{{alpha: 0}}"/>
-			<!--
-			-->
 			<mappers:Mapper sourceField="data.averagePay" sourceMin="0" sourceMax="700000" targetField="averageRect.height" targetMin="0" targetMax="600"/>
 			<local:BinLayout />
 		</mappers:MapperChain>
 	</vis:VisualizationDataGroup>
 	
-	<vis:VisualizationDataGroup id="bubbleVisualizationDataGroup" left="60" top="140" dataProvider="{dataProvider}" itemRenderer="BubbleItemRenderer" transitionPeriod="2" mouseDown="visualizationdatagroup1_mouseDownHandler(event)" runDataUpdateTransitions="false">
+	<vis:VisualizationDataGroup id="bubbleVisualizationDataGroup" left="60" top="140" dataProvider="{dataProvider}" itemRenderer="BubbleItemRenderer" transitionPeriod="2" mouseDown="visualizationdatagroup1_mouseDownHandler(event)" runDataUpdateTransitions="false" visible="true">
 		<mappers:MapperChain>
 			<mappers:Mapper sourceField="data.pay" sourceMin="0" sourceMax="700000" targetField="y" targetMin="600" targetMax="0"/>
 			<mappers:MapperSwitch id="bubbleSwitch">
